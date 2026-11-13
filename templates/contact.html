@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Tat Stephen{% endblock %}
+
+{% block content %}
+<!-- ─── HERO ───────────────────────────────────────────────────────── -->
+  <section class="max-w-4xl mx-auto px-6 pt-36 pb-12">
+    <div class="md:flex-row md:items-start gap-10">
+      <!-- Text -->
+      <div class="flex-1">
+        <h1 class="font-display text-2xl md:text-3xl lg:text-4xl font-700 leading-[1.05] mb-5 tracking-tight" data-animate>
+          Contact me.
+        </h1>
+    
+        <p class="text-muted leading-relaxed mb-8" data-animate>
+          You can reach out to me through my email address: 
+          <a href="#" title="BUK" style="background-color:cadetblue; color:white; padding:2px 4px">tatstephenweb@gmail.com</a>
+          <br>My <a href="#" title="my projects" style="background-color: brown; color:white; padding:2px 4px">github</a> 
+          is also present to view about me, and check out my repositories.
+        </p>
+
+
+        <form class="message-form max-w-2xl">
+          <h2 class="font-display text-xl md:text-2xl lg:text-3xl font-600 leading-[1.05] mb-1">Send Message</h2>
+          <br>
+          <label class="text-muted">Name</label>
+          <input type="text" placeholder="Tat Stephen" class="border-b border-white/20 border-black/20"><br>
+
+          <label class="text-muted">email</label>
+          <input type="email" placeholder="tatstephen15@gmail.com" class="border-b border-white/20 border-black/20"><br>
+          
+          <label class="text-muted">nessage</label>
+          <textarea placeholder="Hello..." class="border-b border-white/20 border-black/20"></textarea><br>
+          
+          <button class="btn-primary px-5 py-3 rounded-lg inline-flex items-center gap-2">Send</button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+{% endblock %}
