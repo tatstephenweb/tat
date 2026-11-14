@@ -1,4 +1,4 @@
-
+:root { --snake-color: #22c55e; }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
