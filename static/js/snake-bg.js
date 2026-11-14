@@ -19,13 +19,12 @@
 
   /* ---------- settings ---------- */
   const CFG = {
-    bgOpacity: 0.22,      // how visible the background snake is
+    bgOpacity: 0.6,       // how visible the background snake is (0 to 1)
     bgTick: 90,           // ms per move in background mode
     autoMaxLen: 28,       // background snake restarts at this score so it never takes over
     playTick: 120,        // ms per move at the start of a played game
     playMinTick: 60,      // fastest speed in a played game
     defaultColor: '#22c55e',
-    prefKey: 'snakeBg',
     bestKey: 'snakeBest',
   };
 
@@ -45,10 +44,12 @@
   const reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- state ---------- */
-  let canvas, ctx, toggle, exitBtn;
+  let canvas, ctx, exitBtn;
   let cell = 24, cols = 0, rows = 0, offX = 0, offY = 0;
   let mode = 'bg';                       // 'bg' | 'play'
-  let enabled;                           // is the background snake on?
+  // Background snake runs unless the visitor prefers reduced motion
+  // (the easter egg still works for them).
+  const enabled = !reduceMotion;
   let snake = [], dir = DIRS[0], food = { x: 0, y: 0 };
   let score = 0, alive = true, deadAt = 0, pending = [];
   let best = Number(store.get(CFG.bestKey)) || 0;
@@ -59,25 +60,17 @@
 
   /* ---------- setup ---------- */
   function init() {
-    const saved = store.get(CFG.prefKey);
-    enabled = saved ? saved === 'on' : !reduceMotion;
-
     const style = document.createElement('style');
     style.textContent = `
       #snake-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;
         opacity:${CFG.bgOpacity};transition:opacity .3s}
       #snake-canvas.is-off{opacity:0}
       #snake-canvas.is-play{z-index:9998;pointer-events:auto;opacity:1;touch-action:none}
-      #snake-toggle{position:fixed;left:12px;bottom:12px;z-index:50;font:12px/1 system-ui,sans-serif;
-        padding:8px 12px;border-radius:999px;border:1px solid currentColor;background:transparent;
-        color:inherit;opacity:.55;cursor:pointer;transition:opacity .2s}
-      #snake-toggle:hover,#snake-toggle:focus-visible{opacity:1}
       #snake-exit{display:none;position:fixed;top:12px;right:12px;z-index:9999;font:14px/1 system-ui,sans-serif;
         padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.6);background:rgba(0,0,0,.4);
         color:#fff;cursor:pointer}
       body.snake-playing{overflow:hidden}
       body.snake-playing #snake-exit{display:block}
-      body.snake-playing #snake-toggle{display:none}
     `;
     document.head.appendChild(style);
 
@@ -87,19 +80,13 @@
     if (!enabled) canvas.classList.add('is-off');
     ctx = canvas.getContext('2d');
 
-    toggle = document.createElement('button');
-    toggle.id = 'snake-toggle';
-    toggle.type = 'button';
-    toggle.addEventListener('click', onToggle);
-
     exitBtn = document.createElement('button');
     exitBtn.id = 'snake-exit';
     exitBtn.type = 'button';
     exitBtn.textContent = 'Exit game';
     exitBtn.addEventListener('click', exitPlay);
 
-    document.body.append(canvas, toggle, exitBtn);
-    syncToggle();
+    document.body.append(canvas, exitBtn);
 
     layout();
     newGame();
@@ -123,7 +110,7 @@
     canvas.width = Math.floor(w * dpr);
     canvas.height = Math.floor(h * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    cell = w < 640 ? 18 : 24;
+    cell = w < 640 ? 22 : 30;
     cols = Math.max(8, Math.floor(w / cell));
     rows = Math.max(8, Math.floor(h / cell));
     offX = (w - cols * cell) / 2;
@@ -278,20 +265,24 @@
       ctx.fillRect(0, 0, w, h);
     }
     ctx.fillStyle = accent;
+    ctx.shadowColor = accent;
 
-    // food
+    // food: big glowing ball
     ctx.globalAlpha = 1;
+    ctx.shadowBlur = 18;
     ctx.beginPath();
-    ctx.arc(offX + food.x * cell + cell / 2, offY + food.y * cell + cell / 2, cell * 0.3, 0, Math.PI * 2);
+    ctx.arc(offX + food.x * cell + cell / 2, offY + food.y * cell + cell / 2, cell * 0.4, 0, Math.PI * 2);
     ctx.fill();
 
-    // snake (head solid, tail fades)
+    // snake (head solid and glowing, tail fades)
     const pad = 2;
     for (let i = snake.length - 1; i >= 0; i--) {
-      ctx.globalAlpha = 0.35 + 0.65 * (1 - i / snake.length);
-      rect(offX + snake[i].x * cell + pad, offY + snake[i].y * cell + pad, cell - pad * 2, cell - pad * 2, 5);
+      ctx.shadowBlur = i === 0 ? 14 : 0;
+      ctx.globalAlpha = 0.55 + 0.45 * (1 - i / snake.length);
+      rect(offX + snake[i].x * cell + pad, offY + snake[i].y * cell + pad, cell - pad * 2, cell - pad * 2, 7);
     }
     ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
 
     if (mode === 'play') hud();
   }
@@ -308,17 +299,6 @@
       ctx.font = '400 15px system-ui, sans-serif';
       ctx.fillText('Space or tap to retry · Esc to exit', innerWidth / 2, innerHeight / 2 + 22);
     }
-  }
-
-  /* ---------- background toggle ---------- */
-  function syncToggle() { toggle.textContent = 'Background snake: ' + (enabled ? 'on' : 'off'); }
-
-  function onToggle() {
-    enabled = !enabled;
-    store.set(CFG.prefKey, enabled ? 'on' : 'off');
-    if (enabled) { canvas.classList.remove('is-off'); newGame(); start(); }
-    else { canvas.classList.add('is-off'); stop(); }
-    syncToggle();
   }
 
   /* ---------- easter egg: play mode ---------- */
