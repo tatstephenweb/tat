@@ -25,6 +25,7 @@
     playTick: 120,        // ms per move at the start of a played game
     playMinTick: 60,      // fastest speed in a played game
     defaultColor: '#22c55e',
+    defaultFoodColor: '#ef4444',   // red ball; override with --snake-food-color in CSS
     bestKey: 'snakeBest',
   };
 
@@ -54,6 +55,7 @@
   let score = 0, alive = true, deadAt = 0, pending = [];
   let best = Number(store.get(CFG.bestKey)) || 0;
   let accent = CFG.defaultColor;
+  let foodColor = CFG.defaultFoodColor;
   let raf = 0, last = 0;
 
   const idx = (x, y) => y * cols + x;
@@ -129,7 +131,9 @@
 
   /* ---------- game ---------- */
   function newGame() {
-    accent = getComputedStyle(document.documentElement).getPropertyValue('--snake-color').trim() || CFG.defaultColor;
+    const cs = getComputedStyle(document.documentElement);
+    accent = cs.getPropertyValue('--snake-color').trim() || CFG.defaultColor;
+    foodColor = cs.getPropertyValue('--snake-food-color').trim() || CFG.defaultFoodColor;
     const len = mode === 'play' ? 3 : 4;
     const y = Math.floor(rows / 2), x0 = Math.floor(cols / 4);
     snake = [];
@@ -264,10 +268,9 @@
       ctx.fillStyle = 'rgba(10,12,16,.94)';
       ctx.fillRect(0, 0, w, h);
     }
-    ctx.fillStyle = accent;
-    ctx.shadowColor = accent;
-
-    // food: big glowing ball
+    // food: big glowing ball in its own colour
+    ctx.fillStyle = foodColor;
+    ctx.shadowColor = foodColor;
     ctx.globalAlpha = 1;
     ctx.shadowBlur = 18;
     ctx.beginPath();
@@ -275,6 +278,8 @@
     ctx.fill();
 
     // snake (head solid and glowing, tail fades)
+    ctx.fillStyle = accent;
+    ctx.shadowColor = accent;
     const pad = 2;
     for (let i = snake.length - 1; i >= 0; i--) {
       ctx.shadowBlur = i === 0 ? 14 : 0;
