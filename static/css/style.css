@@ -417,7 +417,6 @@
   display: grid;
   place-items: center;
   padding: 4rem 1rem;
-  background: #fff;
   font-family: "Outfit", "Urbanist", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
