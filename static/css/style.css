@@ -473,7 +473,6 @@ polaroid {
       min-height: 100vh;
       display: grid;
       place-items: center;
-      background: #fff;
       font-family: "Outfit", "Urbanist", system-ui, -apple-system, "Segoe UI", sans-serif;
   
 }
