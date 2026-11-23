@@ -413,7 +413,6 @@
     }
 
 .polaroid-section {
-  min-height: 100vh;
   display: grid;
   place-items: center;
   padding: 4rem 1rem;
@@ -423,13 +422,13 @@
 /* ---- the stack ---- */
 .polaroid-stack {
   position: relative;
-  width: 420px;
-  height: 440px;
+  width: 350px;
+  height: 370px;
 }
 
 .polaroid {
   position: absolute;
-  width: 300px;
+  width: 250px;
   margin: 0;
   padding: 16px 16px 0;
   box-sizing: border-box;
@@ -441,9 +440,9 @@
 
 /* back card: lavender panel, tilted the other way */
 .polaroid.back {
-  left: 108px;
+  left: 80px;
   top: 10px;
-  height: 340px;
+  height: 250px;
   transform: rotate(-12deg);
 }
 
@@ -464,7 +463,6 @@
 .polaroid.front img {
   display: block;
   width: 100%;
-  height: 268px;
   object-fit: cover;
   border-radius: 2px;
 }
