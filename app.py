@@ -104,4 +104,5 @@ def admin():
 
 
 if __name__ == "__main__":
+    create_message_table()
     app.run(debug=True)
