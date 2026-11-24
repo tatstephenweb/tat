@@ -1,6 +1,6 @@
 :root {
-  --snake-color: #22c55e;       /* snake */
-  --snake-food-color: #ef4444;  /* ball */
+  --snake-color: #22c55e3c;       /* snake */
+  --snake-food-color: #ef444438;  /* ball */
 }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -70,7 +70,6 @@
       width: 100%; height: 100%;
       border-radius: 50%; 
       background: transparent;
-      border: solid 1px #eee;
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .dark #theme-toggle .knob { background-color: transparent; }
@@ -412,62 +411,70 @@
       font-size:14px;
     }
 
+    /* ---- section wrapper ---- */
 .polaroid-section {
+
   display: grid;
   place-items: center;
-  padding: 4rem 1rem;
+  padding: 0rem 1rem;
   font-family: "Outfit", "Urbanist", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 /* ---- the stack ---- */
 .polaroid-stack {
   position: relative;
-  width: 350px;
-  height: 370px;
+  width: 420px;
+  height: 440px;
 }
 
 .polaroid {
   position: absolute;
   width: 250px;
   margin: 0;
-  padding: 16px 16px 0;
+  padding: 10px 10px 0;
   box-sizing: border-box;
   background: #fff;
-  border-radius: 18px;
+  border-radius: 10px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
   transition: transform 0.35s ease;
 }
 
 /* back card: lavender panel, tilted the other way */
 .polaroid.back {
-  left: 80px;
+  left: 108px;
   top: 10px;
-  height: 250px;
+  height: 280px;
   transform: rotate(-12deg);
 }
 
 .polaroid.back .fill {
   width: 100%;
-  height: 268px;
+  height: 200px;
   border-radius: 14px;
   background: #b4b8e0;
 }
 
 /* front card: photo + caption */
 .polaroid.front {
-  left: 10px;
+  left: 5px;
   top: 60px;
-  transform: rotate(12deg);
+  transform: rotate(8deg);
+}
+.polaroid.right {
+  right: 5px;
+  top: 60px;
+  transform: rotate(-20deg);
 }
 
-.polaroid.front img {
+.polaroid.front img, .polaroid.right img {
   display: block;
   width: 100%;
+  height: 200px;
   object-fit: cover;
   border-radius: 2px;
 }
 
-.polaroid.front figcaption {
+.polaroid.front figcaption,.polaroid.right figcaption {
   padding: 16px 0 20px;
   text-align: center;
   font-size: 20px;
@@ -476,9 +483,11 @@
 }
 
 /* hover flourish (delete these two rules if you don't want it) */
-.polaroid-stack:hover .front { transform: rotate(8deg) translateY(-4px); }
+.polaroid-stack:hover .front { transform: rotate(-5deg) translateY(-4px); }
+.polaroid-stack:hover .right { transform: rotate(8deg) translateY(-4px); }
 .polaroid-stack:hover .back  { transform: rotate(-15deg); }
 
 /* shrink on small phones */
 @media (max-width: 480px) {
-  .polaroid-stack { transform: scale(0.8); }}
+  .polaroid-stack { transform: scale(0.8); }
+}
