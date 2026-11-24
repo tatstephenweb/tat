@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}Tat Stephen{% endblock %}</title>
-
+  <link rel="stylesheet" href="{{url_for('static', filename='css/all.min.css')}}">
   <!-- Tailwind (local) — must load BEFORE the config below -->
   <script src="{{ url_for('static', filename='js/tailwind.js') }}"></script>
   <script>
@@ -68,8 +68,14 @@
       <div class="flex items-center gap-5">
       <!-- Desktop links -->
       <a href="{{ url_for('index') }}" class="text-muted">TAT</a>
-      <a href="{{ url_for('works') }}" class="text-muted">Works</a>
-      <a href="{{ url_for('contact') }}" class="text-muted">Contact</a>
+      <a href="{{ url_for('works') }}" class="text-muted">
+        <!--<i class="fas fa-briefcase text-[20px]"></i>-->
+        Works
+      </a>
+      <a href="{{ url_for('contact') }}" class="text-muted">
+        <!--<i class="fas fa-briefcase text-[20px]"></i>-->
+        Contact
+      </a>
     </div>
 
       <div class="flex items-center gap-4">
@@ -81,9 +87,10 @@
           <span class="knob" style="position: absolute; top: 0px;
       display:flex;align-items: center;justify-content: center;
       width: 100%; height: 100%;
-      border-radius: 50%; 
-      background: transparent;
-      border: solid 1px #eee;">a</span>
+      background: transparent;">
+      <i class="fas fa-moon text-[15px] dark:hidden"></i>
+      <i class="fas fa-sun text-[15px] hidden dark:inline"></i>
+      </span>
         </button>
         <!-- Mobile hamburger -->
         <button id="hamburger" class="hidden flex flex-col gap-1.5 p-1" aria-label="Menu">
@@ -104,13 +111,18 @@
   <!-- ─── PAGE CONTENT ───────────────────────────────────────────────── -->
   {% block content %}{% endblock %}
 
-  <footer class="max-w-4xl mx-auto p-6 border-t dark:border-white/20 border-black/20 flex gap-3">
+  <footer class="max-w-4xl mx-auto p-6 border-t dark:border-white/20 border-black/20">
+    <div class="flex gap-3">
     <a href="https://github.com/tatstephenweb" class="text-muted">GitHub</a>
     <a href="mailto:tatstephenweb@gmail.com" class="text-muted">tatstephen15@gmail.com</a>
+    </div>
+
+    <div class="text-muted mb-10">
+      &copy;2026
+    </div>
   </footer>
 
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/snake-bg.js') }}" defer></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>

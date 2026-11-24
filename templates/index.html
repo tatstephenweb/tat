@@ -9,7 +9,7 @@
       <!-- Avatar -->
       <div class="relative mb-10 flex-shrink-0" data-animate>
         <div class="w-20 h-20 rounded-full overflow-hidden">
-          <img src="{{ url_for('static', filename='images/be4739c1-99e6-497b-bec2-15a24054e508.jpeg')}}" alt="Tat Stephen" class="w-full h-full object-cover" />
+          <img src="{{ url_for('static', filename='images/profile-pic.jpg')}}" alt="Tat Stephen" class="w-full h-full object-cover" />
         </div>
       </div>
 
@@ -22,40 +22,50 @@
         <p class="text-muted leading-relaxed mb-8" data-animate>
           I am a Software engineer, obtained my Bachelor of Science (B.Sc.) Software Engineering certificate at 
           <a href="http://buk.edu.ng/Home" title="BUK" style="background-color:cadetblue; color:white; padding:2px 4px">Bayero University, Kano</a>, 3+ years in the industry shipping products and 
-          <a href="#" title="my projects" style="background-color: brown; color:white; padding:2px 4px">projects</a> 
-          hat solves problems. I care deeply about developer experience, system design, and building quality products.
+          <a href="{{ url_for('works') }}#work" title="my projects" style="background-color: brown; color:white; padding:2px 4px">projects</a> 
+          that solves problems. I care deeply about developer experience, system design, and building quality products.
           I am building and learning at the same time. 
           I use different tech stacks for different purposes. 
           I believe great engineering is invisible : it just works.
           <br>
           <br>
           I build fast, scalable, and beautiful digital products. Now crafting products that reach millions. I turn complex problems into clean, elegant code.
-          I am ready and open for any recruitment, internship, partnership and frlance works.
+          I am ready and open for any recruitment, internship, partnership and freelance works.
         </p>
 
 
         <!-- CTAs -->
         <div class="flex flex-wrap items-center gap-4" data-animate>
-          <a href="{{ url_for('works') }}" class="btn-primary px-5 py-3 rounded-lg inline-flex items-center gap-2" style="font-size:14px">
-            <span>Works</span>
+          <a href="{{ url_for('works') }}#work" class="btn-primary px-5 py-3 rounded-lg inline-flex items-center gap-2" style="font-size:14px">
+            <span>Projects</span>
           </a>
-          <a href="#" class="btn-ghost px-5 py-3 rounded-lg inline-flex items-center gap-2" style="font-size:14px">
-            <span>Resume</span>
+          <a href="{{ url_for('static', filename='docs/TAT STEPHEN_resume.pdf')}}" class="btn-ghost px-5 py-3 rounded-lg inline-flex items-center gap-2" style="font-size:14px">
+            <span>My Resume</span>
           </a>
         </div>
 
       </div>
     </div>
   </section>
-<section class="polaroid-section" id="polaroid">
+
+  <section class="polaroid-section" id="polaroid">
     <div class="polaroid-stack">
-      <div class="polaroid back"><div class="fill"></div></div>
+      <div class="polaroid back"><div class="fill"></div>
+    </div>
 
       <figure class="polaroid front">
         <!-- Flask: src="{{ url_for('static', filename='images/profile.jpg') }}" -->
-        <img src="{{ url_for('static', filename='images/be4739c1-99e6-497b-bec2-15a24054e508.jpeg')}}" alt="Tat Stephen" class="w-full h-full object-cover" />
-        <figcaption>@codewithhonour</figcaption>
+        <img src="{{ url_for('static', filename='images/IMG_0249.JPG')}}" alt="Tat Stephen" class="w-full h-full object-cover" />
+        <figcaption></figcaption>
+      </figure>
+
+      <figure class="polaroid right">
+        <!-- Flask: src="{{ url_for('static', filename='images/profile.jpg') }}" -->
+        <img src="{{ url_for('static', filename='images/gangster-pic.jpeg')}}" alt="Tat Stephen" class="w-full h-full object-cover" />
+        <figcaption></figcaption>
       </figure>
     </div>
+    
   </section>
+
 {% endblock %}

@@ -15,22 +15,22 @@
         <p class="text-muted leading-relaxed mb-8" data-animate>
           You can reach out to me through my email address: 
           <a href="mailto:tatstephenweb@gmail.com" style="background-color:cadetblue; color:white; padding:2px 4px">tatstephenweb@gmail.com</a>
-          <br>My <a href="#" title="my projects" style="background-color: brown; color:white; padding:2px 4px">github</a> 
+          <br>My <a href="https://github.com/tatstephenweb" title="my projects" style="background-color: brown; color:white; padding:2px 4px">github</a> 
           is also present to view about me, and check out my repositories.
         </p>
 
 
-        <form class="message-form max-w-2xl">
+        <form class="message-form max-w-2xl" method="POST" action="{{ url_for('contact') }}">
           <h2 class="font-display text-xl md:text-2xl lg:text-3xl font-600 leading-[1.05] mb-1">Send Message</h2>
           <br>
           <label class="text-muted">Name</label>
-          <input type="text" placeholder="Tat Stephen" class="border-b border-white/20 border-black/20"><br>
+          <input type="text" name="name" placeholder="fullname" class="text-muted border-b border-white/20 border-black/20"><br>
 
           <label class="text-muted">email</label>
-          <input type="email" placeholder="tatstephen15@gmail.com" class="border-b border-white/20 border-black/20"><br>
+          <input type="email" name="email" placeholder="email@gmail.com" class="text-muted border-b border-white/20 border-black/20"><br>
           
-          <label class="text-muted">nessage</label>
-          <textarea placeholder="Hello..." class="border-b border-white/20 border-black/20"></textarea><br>
+          <label class="text-muted">Message</label>
+          <textarea name="message" placeholder="your message..." class="text-muted border-b border-white/20 border-black/20"></textarea><br>
           
           <button class="btn-primary px-5 py-3 rounded-lg inline-flex items-center gap-2">Send</button>
         </form>
