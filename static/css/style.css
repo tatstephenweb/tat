@@ -495,12 +495,16 @@
       width: 100%;
 }
 .card p{
-  font-family: 'DM Sans', sans-serif;
+  font-family: Inter, "Inter Fallback";
+    font-size: 16px;
+    font-weight: 450;
+    line-height: 24px;
+    letter-spacing: -0.09px;}
 }
     .tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 24px 24px;
+      gap: 5px 6px;
       margin: 0;
       padding: 0;
       list-style: none;
@@ -517,9 +521,8 @@
       border-radius: 999px;
       white-space: nowrap;
       font-family: 'DM Sans', sans-serif;
-    }
-
-    @media (max-width: 600px) {
-    
-
+      font-family: Inter, "Inter Fallback";
+    font-size: 16px;
+    font-weight: 450;
+    line-height: 24px;
     }
