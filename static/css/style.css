@@ -493,9 +493,10 @@
 
 .card {
       width: 100%;
-      max-width: 940px;
 }
-
+.card p{
+  font-family: 'DM Sans', sans-serif;
+}
     .tags {
       display: flex;
       flex-wrap: wrap;
@@ -507,7 +508,7 @@
 
     .tag {
       display: inline-block;
-      padding: 16px 34px;
+      padding: 8px 16px;
       background: var(--tag-bg);
       color: var(--tag-text);
       font-size: 14px;
@@ -515,9 +516,10 @@
       line-height: 1.2;
       border-radius: 999px;
       white-space: nowrap;
+      font-family: 'DM Sans', sans-serif;
     }
 
     @media (max-width: 600px) {
     
-      .card { padding: 40px 28px 32px; }
+
     }
