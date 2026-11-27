@@ -494,19 +494,7 @@
 .card {
       width: 100%;
       max-width: 940px;
-      background: var(--card-bg);
-      border-left: 2px solid var(--card-border);
-      border-right: 2px solid var(--card-border);
-      padding: 72px 72px 56px;
-    }
-
-    .card h2 {
-      margin: 0 0 14px;
-      font-size: 2.4rem;
-      font-weight: 600;
-      line-height: 1.1;
-      color: var(--heading);
-    }
+}
 
     .tags {
       display: flex;
@@ -522,7 +510,7 @@
       padding: 16px 34px;
       background: var(--tag-bg);
       color: var(--tag-text);
-      font-size: 1.9rem;
+      font-size: 14px;
       font-weight: 300;
       line-height: 1.2;
       border-radius: 999px;
@@ -530,9 +518,6 @@
     }
 
     @media (max-width: 600px) {
-      body { padding: 0 8px; }
+    
       .card { padding: 40px 28px 32px; }
-      .card h2 { font-size: 1.8rem; }
-      .tags { gap: 14px; }
-      .tag { font-size: 1.2rem; padding: 10px 22px; }
     }
